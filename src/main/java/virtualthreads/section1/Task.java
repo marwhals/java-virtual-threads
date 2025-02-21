@@ -1,4 +1,4 @@
-package org.example.virtualthreads.section1;
+package virtualthreads.section1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

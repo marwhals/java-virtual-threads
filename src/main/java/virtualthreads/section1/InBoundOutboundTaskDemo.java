@@ -1,4 +1,4 @@
-package org.example.virtualthreads.section1;
+package virtualthreads.section1;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -58,6 +58,8 @@ public class InBoundOutboundTaskDemo {
         - Virtual threads are daemon by default
         - OS does not schedule them
         - can park virtual threads - OS takes virtual threads to run/mount on carrier thread
+        - Virtual threads create objects in the heap
+        - When tasks are blocked the tasks are unmounted and another can be executed
          */
         var latch = new CountDownLatch(MAX_VIRTUAL);
         var builder = Thread.ofVirtual().name("virtual-", 1);
