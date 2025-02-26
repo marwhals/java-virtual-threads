@@ -1,0 +1,4 @@
+- Tool /class which implements Future<T> with many useful methods to process, combine results and handle errors in a functional style
+- Uses fork join pool for async tasks
+- Can use virtual thread per task executor for IO tasks
+- Limitation - it implements Future. But cancel method doesn't interrupt the thread running the task
