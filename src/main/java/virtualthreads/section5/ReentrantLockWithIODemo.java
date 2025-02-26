@@ -5,19 +5,14 @@ import org.slf4j.LoggerFactory;
 import virtualthreads.util.CommonUtils;
 
 import java.time.Duration;
-/*
-- Unmounting cannot happen with synchronised methods in virtual methods....they become "pinned"
-- This occurs with synchronised methods, synchronised blocks and with the JNI
-- A synchronised virtual thread cannot be unmounted
- */
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
+public class ReentrantLockWithIODemo {
 
-public class PinningThreads {
+    private static final Logger log = LoggerFactory.getLogger(ReentrantLockWithIODemo.class);
+    private static final Lock lock = new ReentrantLock();
 
-    private static final Logger log = LoggerFactory.getLogger(PinningThreads.class);
-
-    // This checks if threads are being pinned in the application
-    // Can monitor the log to see if threads are being pinned or not
     static {
         System.setProperty("jdk.tracePinnedThreads", "short");
     }
@@ -25,10 +20,6 @@ public class PinningThreads {
     public static void main(String[] args) {
 
         Runnable runnable = () -> log.info("*** Test Message ***");
-
-//        Pinning is not a problem with platform threads
-//        demo(Thread.ofPlatform());
-//        Thread.ofPlatform().start(runnable);
 
         demo(Thread.ofVirtual());
         Thread.ofVirtual().start(runnable);
@@ -41,13 +32,21 @@ public class PinningThreads {
         for (int i = 0; i < 50; i++) {
             builder.start(() -> {
                 log.info("Task started. {}", Thread.currentThread());
-                ioTask(); /* Thread is pinned */
+                ioTask();
                 log.info("Task ended. {}", Thread.currentThread());
             });
         }
     }
 
-    private static synchronized void ioTask() {
-        CommonUtils.sleep(Duration.ofSeconds(10));
+    private static void ioTask() {
+        try {
+            lock.lock();
+            CommonUtils.sleep(Duration.ofSeconds(10));
+        } catch (Exception e) {
+            log.error("error", e);
+        } finally {
+            lock.unlock();
+        }
     }
+
 }
