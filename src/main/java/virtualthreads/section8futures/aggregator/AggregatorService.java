@@ -1,7 +1,7 @@
-package virtualthreads.section8executorservice.aggregator;
+package virtualthreads.section8futures.aggregator;
 
 
-import virtualthreads.section8executorservice.externalservice.Client;
+import virtualthreads.section8futures.externalservice.Client;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;

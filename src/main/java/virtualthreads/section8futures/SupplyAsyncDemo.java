@@ -1,4 +1,4 @@
-package virtualthreads.section8executorservice.externalservice;
+package virtualthreads.section8futures;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +8,11 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
+/*
+    We can supply values asynchronously
+    Factory method
+    Executor
+ */
 public class SupplyAsyncDemo {
 
     private static final Logger log = LoggerFactory.getLogger(SupplyAsyncDemo.class);
@@ -17,7 +22,7 @@ public class SupplyAsyncDemo {
         var cf = slowTask();
         cf.thenAccept(v -> log.info("value={}", v));
 
-        // log.info("value={}", cf.join());
+        log.info("value={}", cf.join());
         log.info("main ends");
 
         CommonUtils.sleep(Duration.ofSeconds(2));

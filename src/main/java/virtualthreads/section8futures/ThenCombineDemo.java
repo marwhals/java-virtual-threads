@@ -1,4 +1,4 @@
-package virtualthreads.section8executorservice;
+package virtualthreads.section8futures;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

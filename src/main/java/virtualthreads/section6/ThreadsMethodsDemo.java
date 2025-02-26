@@ -6,9 +6,9 @@ import virtualthreads.util.CommonUtils;
 
 import java.time.Duration;
 
-public class ThreadMethodsDemo {
+public class ThreadsMethodsDemo {
 
-    private static final Logger log = LoggerFactory.getLogger(ThreadMethodsDemo.class);
+    private static final Logger log = LoggerFactory.getLogger(ThreadsMethodsDemo.class);
 
     public static void main(String[] args) throws InterruptedException {
         join();

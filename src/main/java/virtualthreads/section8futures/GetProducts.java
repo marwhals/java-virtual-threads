@@ -1,8 +1,8 @@
-package virtualthreads.section8executorservice;
+package virtualthreads.section8futures;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import virtualthreads.section8executorservice.externalservice.Client;
+import virtualthreads.section8futures.externalservice.Client;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
